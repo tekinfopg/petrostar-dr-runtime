@@ -1,0 +1,23 @@
+services:
+  petrostar-dr-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: petrostar-dr-runtime:8.2
+    container_name: petrostar-dr-app
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8088:80"
+    volumes:
+      - petrostar-dr-kode:/var/www/html
+    environment:
+      TZ: Asia/Jakarta
+    networks:
+      - petrostar-dr
+volumes:
+  petrostar-dr-kode:
+    name: petrostar-dr-kode
+networks:
+  petrostar-dr:
+    external: true
+    name: petrostar-dr
